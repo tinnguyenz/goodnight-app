@@ -1,7 +1,9 @@
 class User < ApplicationRecord
     has_many :sleep_records, dependent: :destroy
-
-    has_many :follows, foreign_key: :follower_id, dependent: :destroy
-    has_many :followees, through: :follows, source: :followeee
-    has_many :followers, through: :follows, source: :follower
-  end
+  
+    has_many :followed_users, foreign_key: :follower_id, class_name: "Relationship"
+    has_many :followees, through: :followed_users, dependent: :delete_all
+  
+    has_many :following_users, foreign_key: :followee_id, class_name: "Relationship"
+    has_many :followers, through: :following_users, dependent: :delete_all
+end
