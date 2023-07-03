@@ -21,14 +21,16 @@ User.all.each do |user|
   # Randomly pick a number of followers (1 to 5)
   num_followers = rand(1..5)
 
-  # Ramdom users to follow
+  # Random users to follow
   followers = User.where.not(id: user.id).sample(num_followers)
 
   # Give them followers
-  user.followers << followers
+  followers.each do |follower|
+    follower.follow(user.id)
+  end
 end
 
-# Have a 10 days of sleep records data 
+# Have 10 days of sleep records data
 User.all.each do |user|
   (1..10).each do |day|
     clock_in_time = Time.now - (day * 24 * 60 * 60) + rand(0..24).hours
