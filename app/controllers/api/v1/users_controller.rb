@@ -1,8 +1,13 @@
 class Api::V1::UsersController < ApplicationController
   def follow
     user = User.find(params[:id])
-    current_user.follow(user.id)
-    render json: { message: 'Successfully followed user.' }
+
+    if current_user.following?(user)
+      render json: { message: "#{user.name} is already being followed." }
+    else
+      current_user.follow(user.id)
+      render json: { message: "Successfully followed #{user.name}." }
+    end
   end
 
   def unfollow
