@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class Api::V1::UsersController < ApplicationController
   def follow
     user = User.find(params[:id])
     current_user.follow(user.id)
