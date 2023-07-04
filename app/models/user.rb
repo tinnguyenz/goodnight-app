@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  validates_presence_of :name
+
   has_many :sleep_records, dependent: :destroy
   
   has_many :active_relationships, class_name: 'Relationship', foreign_key: 'follower_id', dependent: :destroy
