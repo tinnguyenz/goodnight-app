@@ -5,6 +5,8 @@ Rails.application.routes.draw do
       get 'clock-time/:id', to: 'sleep_records#clock_times'
       post 'follow/:id', to: 'users#follow', as: :follow_user
       post 'unfollow/:id', to: 'users#unfollow', as: :unfollow_user
+
+      resources :posts
     end
   end
 end
